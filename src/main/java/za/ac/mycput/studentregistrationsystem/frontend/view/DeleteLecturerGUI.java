@@ -19,7 +19,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import za.ac.mycput.studentregistrationsystem.frontend.service.BackendApiClient;
 
-public class DeleteLecturerGUI extends JFrame implements ActionListener {
+public class DeleteLecturerGUI extends AppFrame implements ActionListener {
     private JButton backBtn;
     private JButton deleteBtn;
     private JTable lecturerTable;
@@ -37,7 +37,7 @@ public class DeleteLecturerGUI extends JFrame implements ActionListener {
         JPanel buttonPnl = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(32, 50, 35, 50));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel titlePnl = new JPanel(new GridLayout(2, 1, 5, 5));
         titlePnl.setBackground(GUIStyle.BACKGROUND);
         titlePnl.add(GUIStyle.heading("DELETE LECTURER", 25));
@@ -48,8 +48,8 @@ public class DeleteLecturerGUI extends JFrame implements ActionListener {
         lecturerTable = new JTable(new DefaultTableModel(rows(),
                 new String[]{"Lecturer ID", "Lecturer Number", "Name", "CPUT Email", "Department"}));
         lecturerTable.setRowHeight(30);
-        lecturerTable.setFont(new Font("Arial", Font.PLAIN, 13));
-        lecturerTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 13));
+        lecturerTable.setFont(new Font(GUIStyle.FONT_FAMILY, Font.PLAIN, 13));
+        lecturerTable.getTableHeader().setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 13));
         JScrollPane scrollPane = GUIStyle.plainScrollPane(lecturerTable);
 
         backBtn = GUIStyle.secondaryButton("Dashboard");
@@ -76,9 +76,9 @@ public class DeleteLecturerGUI extends JFrame implements ActionListener {
     private JPanel header() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(GUIStyle.NAVY);
-        panel.setBorder(BorderFactory.createEmptyBorder(22, 34, 22, 34));
+        panel.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JLabel label = new JLabel("STUDENT REGISTRATION SYSTEM");
-        label.setFont(new Font("Arial", Font.BOLD, 21));
+        label.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 21));
         label.setForeground(Color.WHITE);
         panel.add(label, BorderLayout.WEST);
         return panel;

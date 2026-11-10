@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class LecturerDetailsGUI extends JFrame implements ActionListener {
+public class LecturerDetailsGUI extends AppFrame implements ActionListener {
     private final int lecturerIndex;
     private JButton backBtn;
 
@@ -35,14 +35,14 @@ public class LecturerDetailsGUI extends JFrame implements ActionListener {
         String[] lecturer = LecturerData.lecturerAt(lecturerIndex);
 
         headerPnl.setBackground(GUIStyle.NAVY);
-        headerPnl.setBorder(BorderFactory.createEmptyBorder(22, 34, 22, 34));
+        headerPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JLabel headerLbl = new JLabel("STUDENT REGISTRATION SYSTEM");
-        headerLbl.setFont(new Font("Arial", Font.BOLD, 21));
+        headerLbl.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 21));
         headerLbl.setForeground(Color.WHITE);
         headerPnl.add(headerLbl, BorderLayout.WEST);
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(35, 170, 40, 170));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel titlePnl = new JPanel(new GridLayout(2, 1, 5, 5));
         titlePnl.setBackground(GUIStyle.BACKGROUND);
         titlePnl.add(GUIStyle.heading("LECTURER DETAILS", 25));
@@ -72,6 +72,26 @@ public class LecturerDetailsGUI extends JFrame implements ActionListener {
 
         backBtn = GUIStyle.secondaryButton("Back");
         buttonPnl.setBackground(GUIStyle.WHITE);
+        JButton enableLogin=GUIStyle.primaryButton("Enable lecturer login");
+        enableLogin.addActionListener(event -> {
+            String password=LecturerLoginDialog.choosePassword(this);
+            if(password==null)return;
+            enableLogin.setEnabled(false);
+            new javax.swing.SwingWorker<String,Void>() {
+                protected String doInBackground() throws Exception {
+                    return za.ac.mycput.studentregistrationsystem.frontend.service.BackendApiClient.enableLecturerLogin(
+                        lecturer[LecturerData.PERSON_ID],password);
+                }
+                protected void done() {
+                    enableLogin.setEnabled(true);
+                    try {javax.swing.JOptionPane.showMessageDialog(LecturerDetailsGUI.this,
+                        "Lecturer login enabled.\nUsername: "+get()+"\nUse the password you just entered.");}
+                    catch(Exception error) {SwingUtilitiesHelper.showBackendError(LecturerDetailsGUI.this,
+                        error.getCause() instanceof Exception cause ? cause : error);}
+                }
+            }.execute();
+        });
+        buttonPnl.add(enableLogin);
         buttonPnl.add(backBtn);
         cardPnl.setLayout(new BorderLayout(0, 24));
         cardPnl.add(GUIStyle.plainScrollPane(sectionsPnl), BorderLayout.CENTER);
@@ -91,7 +111,7 @@ public class LecturerDetailsGUI extends JFrame implements ActionListener {
 
     private void addRow(JPanel panel, String labelText, String valueText) {
         JLabel label = GUIStyle.normalLabel(labelText);
-        label.setFont(new Font("Arial", Font.BOLD, 13));
+        label.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 13));
         panel.add(label);
         panel.add(GUIStyle.normalLabel(valueText));
     }

@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class MyClassesGUI extends JFrame implements ActionListener {
+public class MyClassesGUI extends AppFrame implements ActionListener {
     private JButton backBtn;
 
     public void setGUI() {
@@ -27,14 +27,14 @@ public class MyClassesGUI extends JFrame implements ActionListener {
         JPanel buttonPnl = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         headerPnl.setBackground(GUIStyle.NAVY);
-        headerPnl.setBorder(BorderFactory.createEmptyBorder(22, 34, 22, 34));
+        headerPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JLabel headerLbl = new JLabel("STUDENT REGISTRATION SYSTEM");
-        headerLbl.setFont(new Font("Arial", Font.BOLD, 21));
+        headerLbl.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 21));
         headerLbl.setForeground(Color.WHITE);
         headerPnl.add(headerLbl, BorderLayout.WEST);
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(35, 100, 40, 100));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel titlePnl = new JPanel(new GridLayout(2, 1, 5, 5));
         titlePnl.setBackground(GUIStyle.BACKGROUND);
         titlePnl.add(GUIStyle.heading("MY CLASSES", 25));
@@ -95,7 +95,7 @@ public class MyClassesGUI extends JFrame implements ActionListener {
 
     private JLabel boldLabel(String text) {
         JLabel label = GUIStyle.normalLabel(text);
-        label.setFont(new Font("Arial", Font.BOLD, 13));
+        label.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 13));
         return label;
     }
 

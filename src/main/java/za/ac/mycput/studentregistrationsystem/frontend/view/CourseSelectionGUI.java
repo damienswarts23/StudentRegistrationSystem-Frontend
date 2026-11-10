@@ -22,7 +22,7 @@ import java.util.List;
 import za.ac.mycput.studentregistrationsystem.frontend.service.BackendApiClient;
 import za.ac.mycput.studentregistrationsystem.frontend.service.BackendApiClient.CourseOption;
 
-public class CourseSelectionGUI extends JFrame implements ActionListener {
+public class CourseSelectionGUI extends AppFrame implements ActionListener {
     private JComboBox<CourseOption> firstCourseCmb;
     private JComboBox<CourseOption> secondCourseCmb;
     private JComboBox<CourseOption> thirdCourseCmb;
@@ -38,14 +38,14 @@ public class CourseSelectionGUI extends JFrame implements ActionListener {
         JPanel buttonPnl = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         headerPnl.setBackground(GUIStyle.NAVY);
-        headerPnl.setBorder(BorderFactory.createEmptyBorder(22, 34, 22, 34));
+        headerPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JLabel headerLbl = new JLabel("STUDENT REGISTRATION SYSTEM");
-        headerLbl.setFont(new Font("Arial", Font.BOLD, 21));
+        headerLbl.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 21));
         headerLbl.setForeground(Color.WHITE);
         headerPnl.add(headerLbl, BorderLayout.WEST);
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(60, 210, 60, 210));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel titlePnl = new JPanel(new GridLayout(2, 1, 5, 5));
         titlePnl.setBackground(GUIStyle.BACKGROUND);
         titlePnl.add(GUIStyle.heading("CHOOSE COURSES", 25));

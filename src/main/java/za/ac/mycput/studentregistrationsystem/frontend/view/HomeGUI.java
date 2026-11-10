@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class HomeGUI extends JFrame implements ActionListener {
+public class HomeGUI extends AppFrame implements ActionListener {
     private JButton applyBtn;
     private JButton trackApplicationBtn;
     private JButton loginBtn;
@@ -34,10 +34,10 @@ public class HomeGUI extends JFrame implements ActionListener {
         JPanel cardPnl = new JPanel(new GridLayout(1, 3, 20, 20));
 
         headerPnl.setBackground(GUIStyle.NAVY);
-        headerPnl.setBorder(BorderFactory.createEmptyBorder(24, 35, 24, 35));
+        headerPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         titlePnl.setBackground(GUIStyle.NAVY);
         JLabel systemLbl = new JLabel("STUDENT REGISTRATION SYSTEM");
-        systemLbl.setFont(new Font("Arial", Font.BOLD, 24));
+        systemLbl.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 24));
         systemLbl.setForeground(Color.WHITE);
         JLabel roleLbl = new JLabel("APPLICATION PORTAL");
         roleLbl.setForeground(new Color(209, 213, 219));
@@ -46,7 +46,7 @@ public class HomeGUI extends JFrame implements ActionListener {
         headerPnl.add(titlePnl, BorderLayout.WEST);
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(44, 35, 44, 35));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel introPnl = new JPanel(new GridLayout(2, 1, 5, 5));
         introPnl.setBackground(GUIStyle.BACKGROUND);
         JLabel welcomeLbl = GUIStyle.heading("WELCOME", 28);
@@ -59,17 +59,19 @@ public class HomeGUI extends JFrame implements ActionListener {
         cardPnl.setBackground(GUIStyle.BACKGROUND);
         cardPnl.add(menuCard("APPLY", "Enter applicant information and choose courses.", applyBtn));
         cardPnl.add(menuCard("TRACK APPLICATION", "Preview application status information.", trackApplicationBtn));
-        cardPnl.add(menuCard("LOGIN", "Administrator access to the dashboard.", loginBtn));
+        cardPnl.add(menuCard("LOGIN", "Sign in as a student, lecturer or administrator.", loginBtn));
 
-        contentPnl.add(introPnl, BorderLayout.NORTH);
-        contentPnl.add(cardPnl, BorderLayout.CENTER);
+        JPanel welcome=RegiLearnBrand.welcomePanel(false);
+        welcome.setPreferredSize(new Dimension(960,240));
+        contentPnl.add(welcome,BorderLayout.CENTER);
+        contentPnl.add(cardPnl,BorderLayout.SOUTH);
         applyBtn.addActionListener(this);
         trackApplicationBtn.addActionListener(this);
         loginBtn.addActionListener(this);
         mainPnl.add(headerPnl, BorderLayout.NORTH);
         mainPnl.add(contentPnl, BorderLayout.CENTER);
         this.add(mainPnl);
-        this.setTitle("Student Registration System");
+        this.setTitle("RegiLearn · Welcome");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setMinimumSize(new Dimension(1050, 680));
         this.setLocationRelativeTo(null);
@@ -77,17 +79,7 @@ public class HomeGUI extends JFrame implements ActionListener {
     }
 
     private JPanel menuCard(String titleText, String infoText, JButton button) {
-        JPanel card = GUIStyle.whiteCard();
-        JPanel buttonPnl = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        card.setLayout(new BorderLayout(0, 15));
-        JLabel title = GUIStyle.heading(titleText, 17);
-        JLabel info = GUIStyle.normalLabel(infoText);
-        buttonPnl.setBackground(GUIStyle.WHITE);
-        buttonPnl.add(button);
-        card.add(title, BorderLayout.NORTH);
-        card.add(info, BorderLayout.CENTER);
-        card.add(buttonPnl, BorderLayout.SOUTH);
-        return card;
+        return GUIStyle.actionCard(titleText, infoText, button);
     }
 
     @Override

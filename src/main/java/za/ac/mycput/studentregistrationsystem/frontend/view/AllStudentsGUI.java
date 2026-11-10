@@ -21,7 +21,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import za.ac.mycput.studentregistrationsystem.frontend.service.BackendApiClient.StudentAdminOption;
 
-public class AllStudentsGUI extends JFrame implements ActionListener {
+public class AllStudentsGUI extends AppFrame implements ActionListener {
     private JButton backBtn;
     private JTable studentTable;
 
@@ -38,7 +38,7 @@ public class AllStudentsGUI extends JFrame implements ActionListener {
         JPanel buttonPnl = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(32, 42, 35, 42));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel titlePnl = new JPanel(new GridLayout(2, 1, 5, 5));
         titlePnl.setBackground(GUIStyle.BACKGROUND);
         titlePnl.add(GUIStyle.heading("ALL STUDENTS", 25));
@@ -50,8 +50,8 @@ public class AllStudentsGUI extends JFrame implements ActionListener {
                 new String[]{"Student ID", "Student Number", "Name", "Student Email",
                     "Personal Email", "Course"}));
         studentTable.setRowHeight(30);
-        studentTable.setFont(new Font("Arial", Font.PLAIN, 13));
-        studentTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 13));
+        studentTable.setFont(new Font(GUIStyle.FONT_FAMILY, Font.PLAIN, 13));
+        studentTable.getTableHeader().setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 13));
         studentTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -84,9 +84,9 @@ public class AllStudentsGUI extends JFrame implements ActionListener {
     private JPanel header() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(GUIStyle.NAVY);
-        panel.setBorder(BorderFactory.createEmptyBorder(22, 34, 22, 34));
+        panel.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JLabel label = new JLabel("STUDENT REGISTRATION SYSTEM");
-        label.setFont(new Font("Arial", Font.BOLD, 21));
+        label.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 21));
         label.setForeground(Color.WHITE);
         panel.add(label, BorderLayout.WEST);
         return panel;

@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import za.ac.mycput.studentregistrationsystem.frontend.service.BackendApiClient.StudentAdminOption;
 
-public class EditStudentAdminDetailsGUI extends JFrame implements ActionListener {
+public class EditStudentAdminDetailsGUI extends AppFrame implements ActionListener {
     private final int studentIndex;
     private JTextField firstNameTxtFld;
     private JTextField lastNameTxtFld;
@@ -50,14 +50,14 @@ public class EditStudentAdminDetailsGUI extends JFrame implements ActionListener
         JPanel buttonPnl = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         headerPnl.setBackground(GUIStyle.NAVY);
-        headerPnl.setBorder(BorderFactory.createEmptyBorder(22, 34, 22, 34));
+        headerPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JLabel headerLbl = new JLabel("STUDENT REGISTRATION SYSTEM");
-        headerLbl.setFont(new Font("Arial", Font.BOLD, 21));
+        headerLbl.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 21));
         headerLbl.setForeground(Color.WHITE);
         headerPnl.add(headerLbl, BorderLayout.WEST);
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(28, 120, 35, 120));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel titlePnl = new JPanel(new GridLayout(2, 1, 5, 5));
         titlePnl.setBackground(GUIStyle.BACKGROUND);
         titlePnl.add(GUIStyle.heading("EDIT STUDENT DETAILS", 25));
@@ -137,7 +137,7 @@ public class EditStudentAdminDetailsGUI extends JFrame implements ActionListener
 
     private void addValue(JPanel panel, String label, String value) {
         JLabel name = GUIStyle.normalLabel(label + ":");
-        name.setFont(new Font("Arial", Font.BOLD, 13));
+        name.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 13));
         panel.add(name);
         JLabel data = GUIStyle.normalLabel(value == null ? "" : value);
         data.setForeground(GUIStyle.MUTED);

@@ -53,7 +53,7 @@ public class LecturerData {
         return pendingClasses;
     }
 
-    public static int savePendingLecturerToBackend() throws Exception {
+    public static int savePendingLecturerToBackend(String initialPassword) throws Exception {
         if (pendingLecturer == null) {
             throw new IllegalArgumentException("No lecturer details are waiting to be saved.");
         }
@@ -65,7 +65,7 @@ public class LecturerData {
                 pendingLecturer[PHONE], Integer.parseInt(pendingLecturer[DEPARTMENT_ID]),
                 pendingLecturer[STREET], pendingLecturer[SUBURB],
                 pendingLecturer[CITY], pendingLecturer[POSTAL_CODE],
-                pendingLecturer[PROVINCE]);
+                pendingLecturer[PROVINCE], initialPassword);
 
         int lecturerIndex = useBackendLecturer(created);
         int personId = Integer.parseInt(lecturers.get(lecturerIndex)[PERSON_ID]);

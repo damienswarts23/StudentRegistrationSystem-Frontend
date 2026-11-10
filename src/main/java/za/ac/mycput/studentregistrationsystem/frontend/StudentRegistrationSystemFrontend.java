@@ -8,7 +8,7 @@ public class StudentRegistrationSystemFrontend {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             za.ac.mycput.studentregistrationsystem.frontend.view.GUIStyle.installApplicationStyle();
-            new HomeGUI().setGUI();
+            za.ac.mycput.studentregistrationsystem.frontend.view.RegiLearnSplash.show(() -> new HomeGUI().setGUI());
         });
     }
 }

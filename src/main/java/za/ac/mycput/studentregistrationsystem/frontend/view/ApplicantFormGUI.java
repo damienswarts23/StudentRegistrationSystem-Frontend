@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-public class ApplicantFormGUI extends JFrame implements ActionListener {
+public class ApplicantFormGUI extends AppFrame implements ActionListener {
     private final String[] fields = {"First Name", "Last Name", "Date of Birth", "Gender", "Race", "Email", "Phone Number", "Street", "Suburb", "City", "Postal Code", "Province"};
     private final JTextField[] fieldTxtFlds = new JTextField[fields.length];
     private DatePickerField dateOfBirthPicker;
@@ -36,14 +36,14 @@ public class ApplicantFormGUI extends JFrame implements ActionListener {
         JPanel buttonPnl = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         headerPnl.setBackground(GUIStyle.NAVY);
-        headerPnl.setBorder(BorderFactory.createEmptyBorder(22, 34, 22, 34));
+        headerPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JLabel headerLbl = new JLabel("STUDENT REGISTRATION SYSTEM");
-        headerLbl.setFont(new Font("Arial", Font.BOLD, 21));
+        headerLbl.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 21));
         headerLbl.setForeground(Color.WHITE);
         headerPnl.add(headerLbl, BorderLayout.WEST);
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(28, 170, 35, 170));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel titlePnl = new JPanel(new GridLayout(2, 1, 5, 5));
         titlePnl.setBackground(GUIStyle.BACKGROUND);
         titlePnl.add(GUIStyle.heading("APPLICANT DETAILS", 25));

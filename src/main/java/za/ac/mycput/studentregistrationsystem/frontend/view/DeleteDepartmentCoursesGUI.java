@@ -19,7 +19,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import za.ac.mycput.studentregistrationsystem.frontend.service.BackendApiClient;
 
-public class DeleteDepartmentCoursesGUI extends JFrame implements ActionListener {
+public class DeleteDepartmentCoursesGUI extends AppFrame implements ActionListener {
     private final int departmentIndex;
     private JButton openCourseBtn;
     private JButton deleteCourseBtn;
@@ -42,14 +42,14 @@ public class DeleteDepartmentCoursesGUI extends JFrame implements ActionListener
         JPanel courseActionPnl = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         headerPnl.setBackground(GUIStyle.NAVY);
-        headerPnl.setBorder(BorderFactory.createEmptyBorder(22, 34, 22, 34));
+        headerPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JLabel headerLbl = new JLabel("STUDENT REGISTRATION SYSTEM");
-        headerLbl.setFont(new Font("Arial", Font.BOLD, 21));
+        headerLbl.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 21));
         headerLbl.setForeground(Color.WHITE);
         headerPnl.add(headerLbl, BorderLayout.WEST);
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(32, 50, 35, 50));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel titlePnl = new JPanel(new GridLayout(3, 1, 5, 5));
         titlePnl.setBackground(GUIStyle.BACKGROUND);
         titlePnl.add(GUIStyle.heading("DELETE DEPARTMENT CONTENT", 25));
@@ -65,8 +65,8 @@ public class DeleteDepartmentCoursesGUI extends JFrame implements ActionListener
         courseTable = new JTable(new DefaultTableModel(rows(courses),
                 new String[]{"Course ID", "Course Code", "Course Name", "Department"}));
         courseTable.setRowHeight(30);
-        courseTable.setFont(new Font("Arial", Font.PLAIN, 13));
-        courseTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 13));
+        courseTable.setFont(new Font(GUIStyle.FONT_FAMILY, Font.PLAIN, 13));
+        courseTable.getTableHeader().setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 13));
         JScrollPane scrollPane = GUIStyle.plainScrollPane(courseTable);
 
         openCourseBtn = GUIStyle.primaryButton("Open Course");

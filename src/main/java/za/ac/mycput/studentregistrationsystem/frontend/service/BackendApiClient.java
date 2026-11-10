@@ -13,8 +13,18 @@ import java.util.List;
 import za.ac.mycput.studentregistrationsystem.frontend.view.ApplicationPreviewData;
 
 public class BackendApiClient {
-    private static final String BASE_URL = "http://localhost:8080/api";
-    private static final HttpClient CLIENT = HttpClient.newHttpClient();
+    private static final String BASE_URL = System.getProperty("srs.api.url", "http://localhost:8080/api");
+    private static final java.net.CookieManager COOKIES = new java.net.CookieManager(null, java.net.CookiePolicy.ACCEPT_ORIGINAL_SERVER);
+    private static String csrfToken;
+    private static String[] profile;
+    static {
+        URI uri = URI.create(BASE_URL);
+        if (!"https".equalsIgnoreCase(uri.getScheme()) && !("http".equalsIgnoreCase(uri.getScheme()) &&
+            java.util.Set.of("localhost", "127.0.0.1", "[::1]").contains(uri.getHost()))) {
+            throw new IllegalArgumentException("Use HTTPS for a remote backend.");
+        }
+    }
+    private static final HttpClient CLIENT = HttpClient.newBuilder().cookieHandler(COOKIES).connectTimeout(Duration.ofSeconds(10)).build();
 
     private BackendApiClient() {
     }
@@ -109,7 +119,7 @@ public class BackendApiClient {
             String dateOfBirth, String gender, String race,
             String personalEmail, String phoneNumber, int departmentId,
             String street, String suburb, String city, String postalCode,
-            String province) throws Exception {
+            String province, String initialPassword) throws Exception {
 
         String json = "{\"personId\":0,\"lecturerId\":0"
                 + ",\"employeeNumber\":\"\",\"lecturerEmail\":\"\""
@@ -128,7 +138,17 @@ public class BackendApiClient {
                 + ",\"postalCode\":" + quote(postalCode)
                 + ",\"province\":" + quote(province) + "}"
                 + ",\"department\":{\"departmentId\":" + departmentId + "}}";
-        return post("/lecturers/create-text", json);
+        return post("/lecturers/create-text", "{\"lecturer\":" + json + ",\"initialPassword\":" + quote(initialPassword) + "}");
+    }
+
+    public static String resetStudentLogin(int studentId,String password) throws Exception {
+        return form("/students/"+studentId+"/reset-login-password","password="+encode(password));
+    }
+    public static String enableStudentLogin(int studentId,String password) throws Exception {
+        return form("/students/"+studentId+"/login-account","password="+encode(password));
+    }
+    public static String enableLecturerLogin(String personId,String password) throws Exception {
+        return form("/lecturers/"+Integer.parseInt(personId)+"/login-account","password="+encode(password));
     }
 
     public static void assignLecturerToClass(int classId, int lecturerPersonId) throws Exception {
@@ -184,7 +204,12 @@ public class BackendApiClient {
     }
 
     public static String getApplicationResult(String email) throws Exception {
-        return get("/applications/result-text?email=" + encode(email));
+        HttpResponse<String> response = CLIENT.send(request("/applications/result-text?email="+encode(email))
+                .timeout(Duration.ofSeconds(10)).GET().build(),HttpResponse.BodyHandlers.ofString());
+        if(response.statusCode()==401 || response.statusCode()==403)
+            throw new IOException("You no longer have access to this application session. Sign in with your student account to view your result. If your login has not been enabled, ask an admin to enable it from your student details. Your application has not been deleted.");
+        if(response.statusCode()==404)throw new IOException("No application result was found for this account/email.");
+        checkResponse(response);return response.body();
     }
 
     public static String findStudentByEmail(String email) throws Exception {
@@ -356,14 +381,75 @@ public class BackendApiClient {
         return registrations;
     }
 
+    private static HttpRequest.Builder request(String path) throws Exception {
+        if (csrfToken == null) refreshCsrf();
+        return HttpRequest.newBuilder(URI.create(BASE_URL + path)).header("X-CSRF-TOKEN", csrfToken);
+    }
+
+    private static void refreshCsrf() throws Exception {
+        HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + "/auth/csrf"))
+                .timeout(Duration.ofSeconds(10)).GET().build();
+        csrfToken = sendForBody(request).trim();
+    }
+
+    public static String login(String username, String password) throws Exception {
+        clearSession();
+        try {
+            form("/auth/login", "username=" + encode(username) + "&password=" + encode(password));
+            refreshCsrf(); // Spring rotates the token and session on successful login.
+            refreshProfile();
+            return profile[1];
+        } catch (Exception e) { clearSession(); throw e; }
+    }
+
+    public static void refreshProfile() throws Exception {
+        profile = get("/auth/me").split("\\n", -1);
+        if (profile.length != 5) throw new IOException("Unexpected account response.");
+    }
+    public static String updateOwnLecturerDetails(String[] v) throws Exception {
+        String[] keys={"personalEmail","phoneNumber","street","suburb","city","postalCode","province"};
+        StringBuilder path=new StringBuilder("/lecturers/me/personal-details?");
+        for(int i=0;i<keys.length;i++){if(i>0)path.append('&');path.append(keys[i]).append('=').append(encode(v[i]));}
+        return putAndGet(path.toString());
+    }
+    public static String currentName() { return profile == null ? "" : profile[2]; }
+    public static String currentRole() { return profile == null ? "" : profile[1]; }
+    public static String currentUsername() { return profile == null ? "" : profile[0]; }
+    public static byte[] currentPhoto() { return profile == null || profile[4].isEmpty() ? null : java.util.Base64.getDecoder().decode(profile[4]); }
+    public static void clearSession() { profile = null; csrfToken = null; COOKIES.getCookieStore().removeAll(); }
+    public static void logout() throws Exception {
+        try { postNoBody("/auth/logout"); } finally { clearSession(); }
+    }
+    public static void saveName(String name) throws Exception {
+        form("/auth/profile", "displayName=" + encode(name)); refreshProfile();
+    }
+    public static void savePhoto(byte[] bytes) throws Exception {
+        sendForBody(request("/auth/photo").timeout(Duration.ofSeconds(20)).header("Content-Type", "application/octet-stream")
+                .POST(HttpRequest.BodyPublishers.ofByteArray(bytes)).build()); refreshProfile();
+    }
+    public static void removePhoto() throws Exception { delete("/auth/photo"); refreshProfile(); }
+    public static void changePassword(String oldPassword, String newPassword) throws Exception {
+        form("/auth/password", "currentPassword=" + encode(oldPassword) + "&newPassword=" + encode(newPassword)); clearSession();
+    }
+    public static String createAccount(String role, String linkedId, String username, String name, String password) throws Exception {
+        return form("/auth/accounts", "role=" + encode(role) + "&linkedId=" + encode(linkedId.isBlank() ? "0" : linkedId)
+                + "&username=" + encode(username) + "&displayName=" + encode(name) + "&password=" + encode(password));
+    }
+    public static String adminLog() throws Exception { return get("/admin-log"); }
+    private static String form(String path, String body) throws Exception {
+        return sendForBody(request(path).timeout(Duration.ofSeconds(15))
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .POST(HttpRequest.BodyPublishers.ofString(body)).build());
+    }
+
     private static String get(String path) throws Exception {
-        HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + path))
+        HttpRequest request = request(path)
                 .timeout(Duration.ofSeconds(10)).GET().build();
         return sendForBody(request);
     }
 
     private static String getOrNull(String path) throws Exception {
-        HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + path))
+        HttpRequest request = request(path)
                 .timeout(Duration.ofSeconds(10)).GET().build();
         HttpResponse<String> response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() == 404) {
@@ -374,7 +460,7 @@ public class BackendApiClient {
     }
 
     private static String post(String path, String body) throws Exception {
-        HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + path))
+        HttpRequest request = request(path)
                 .timeout(Duration.ofSeconds(10))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(body)).build();
@@ -382,27 +468,27 @@ public class BackendApiClient {
     }
 
     private static String postNoBody(String path) throws Exception {
-        HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + path))
+        HttpRequest request = request(path)
                 .timeout(Duration.ofSeconds(10))
                 .POST(HttpRequest.BodyPublishers.noBody()).build();
         return sendForBody(request);
     }
 
     private static void put(String path) throws Exception {
-        HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + path))
+        HttpRequest request = request(path)
                 .timeout(Duration.ofSeconds(10)).PUT(HttpRequest.BodyPublishers.noBody()).build();
         HttpResponse<String> response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
         checkResponse(response);
     }
 
     private static String putAndGet(String path) throws Exception {
-        HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + path))
+        HttpRequest request = request(path)
                 .timeout(Duration.ofSeconds(10)).PUT(HttpRequest.BodyPublishers.noBody()).build();
         return sendForBody(request);
     }
 
     private static void delete(String path) throws Exception {
-        HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + path))
+        HttpRequest request = request(path)
                 .timeout(Duration.ofSeconds(10)).DELETE().build();
         HttpResponse<String> response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
         checkResponse(response);
@@ -415,6 +501,13 @@ public class BackendApiClient {
     }
 
     private static void checkResponse(HttpResponse<String> response) throws IOException {
+        if (response.statusCode() == 401) {
+            clearSession();
+            throw new IOException("Incorrect username or password, or your session has expired. Please sign in again.");
+        }
+        if (response.statusCode() == 403) {
+            throw new IOException("Access denied. Your role cannot perform this action, or your session has expired.");
+        }
         if (response.statusCode() < 200 || response.statusCode() >= 300) {
             throw new IOException("Backend returned HTTP " + response.statusCode()
                     + (response.body().isBlank() ? "" : ": " + response.body()));

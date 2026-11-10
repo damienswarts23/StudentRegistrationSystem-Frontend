@@ -18,8 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import za.ac.mycput.studentregistrationsystem.frontend.service.BackendApiClient;
 
-public class LoginGUI extends JFrame implements ActionListener {
-    private static final String ADMIN_EMAIL = "admin@cput.ac.za";
+public class LoginGUI extends AppFrame implements ActionListener {
     private JTextField usernameTxtFld;
     private JPasswordField passwordTxtFld;
     private JButton loginBtn;
@@ -36,28 +35,13 @@ public class LoginGUI extends JFrame implements ActionListener {
 
     public void setGUI() {
         JPanel mainPnl = new JPanel(new GridLayout(1, 2));
-        JPanel leftPnl = new JPanel(new GridLayout(4, 1, 10, 10));
+        JPanel leftPnl = RegiLearnBrand.welcomePanel(true);
         JPanel rightPnl = new JPanel(new BorderLayout());
         JPanel formPnl = GUIStyle.whiteCard();
         JPanel fieldsPnl = new JPanel(new GridLayout(8, 1, 8, 8));
         JPanel buttonPnl = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JPanel bottomPnl = new JPanel(new BorderLayout());
         JPanel homePnl = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-
-        leftPnl.setBackground(GUIStyle.NAVY);
-        leftPnl.setBorder(BorderFactory.createEmptyBorder(115, 55, 115, 55));
-        JLabel systemLbl = new JLabel("STUDENT REGISTRATION", SwingConstants.LEFT);
-        systemLbl.setFont(new Font("Arial", Font.BOLD, 30));
-        systemLbl.setForeground(GUIStyle.WHITE);
-        JLabel systemLbl2 = new JLabel("SYSTEM", SwingConstants.LEFT);
-        systemLbl2.setFont(new Font("Arial", Font.BOLD, 30));
-        systemLbl2.setForeground(GUIStyle.WHITE);
-        JLabel infoLbl = new JLabel("Manage students, lecturers and academic records.");
-        infoLbl.setForeground(new java.awt.Color(209, 213, 219));
-        leftPnl.add(systemLbl);
-        leftPnl.add(systemLbl2);
-        leftPnl.add(infoLbl);
-        leftPnl.add(new JLabel());
 
         formPnl.setLayout(new BorderLayout(0, 25));
         JPanel titlePnl = new JPanel(new GridLayout(2, 1, 5, 5));
@@ -72,7 +56,7 @@ public class LoginGUI extends JFrame implements ActionListener {
         fieldsPnl.add(usernameTxtFld);
         fieldsPnl.add(GUIStyle.normalLabel("Password"));
         fieldsPnl.add(passwordTxtFld);
-        fieldsPnl.add(new JLabel("Admin: admin@cput.ac.za"));
+        fieldsPnl.add(new JLabel("Use your account email and password"));
         fieldsPnl.add(new JLabel("Students: use the generated student email"));
         fieldsPnl.add(new JLabel("Lecturers: use the lecturer email"));
         buttonPnl.setBackground(GUIStyle.WHITE);
@@ -87,14 +71,21 @@ public class LoginGUI extends JFrame implements ActionListener {
         formPnl.add(bottomPnl, BorderLayout.SOUTH);
 
         rightPnl.setBackground(GUIStyle.BACKGROUND);
-        rightPnl.setBorder(BorderFactory.createEmptyBorder(90, 75, 90, 75));
-        rightPnl.add(formPnl, BorderLayout.CENTER);
+        rightPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
+        rightPnl.setLayout(new java.awt.LayoutManager(){
+            public void addLayoutComponent(String n,java.awt.Component c){} public void removeLayoutComponent(java.awt.Component c){}
+            public Dimension preferredLayoutSize(java.awt.Container c){return new Dimension(540,520);}public Dimension minimumLayoutSize(java.awt.Container c){return new Dimension(420,470);}
+            public void layoutContainer(java.awt.Container c){java.awt.Insets in=c.getInsets();int w=Math.min(480,c.getWidth()-in.left-in.right),h=Math.min(470,c.getHeight()-in.top-in.bottom);formPnl.setBounds((c.getWidth()-w)/2,(c.getHeight()-h)/2,w,h);}
+        });
+        formPnl.setPreferredSize(new Dimension(480,470));
+        rightPnl.add(formPnl);
         mainPnl.add(leftPnl);
         mainPnl.add(rightPnl);
         homeBtn.addActionListener(this);
         loginBtn.addActionListener(this);
+        getRootPane().setDefaultButton(loginBtn);
         this.add(mainPnl);
-        this.setTitle("Student Registration System - Login");
+        this.setTitle("RegiLearn · Sign in");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setMinimumSize(new Dimension(1050, 680));
         this.setLocationRelativeTo(null);
@@ -110,35 +101,42 @@ public class LoginGUI extends JFrame implements ActionListener {
         }
         String username = usernameTxtFld.getText().trim();
         String password = new String(passwordTxtFld.getPassword());
-        if (password.isBlank()) {
-            JOptionPane.showMessageDialog(this, "Enter any non-empty password for this static login.");
+        if (username.isBlank() || password.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Enter your email and password.");
             return;
         }
-        if (username.equalsIgnoreCase(ADMIN_EMAIL)) {
-            this.dispose();
-            new AdminDashboardGUI().setGUI();
-        } else {
-            try {
-                String student = BackendApiClient.findStudentByEmail(username);
-                if (student != null) {
-                    ApplicationPreviewData.loadBackendResult(student);
-                    this.dispose();
-                    new StudentDashboardGUI().setGUI();
-                    return;
+        loginBtn.setEnabled(false);
+        homeBtn.setEnabled(false);
+        new javax.swing.SwingWorker<String, Void>() {
+            private String record;
+            @Override protected String doInBackground() throws Exception {
+                String role = BackendApiClient.login(username, password);
+                try {
+                if ("STUDENT".equals(role)) record = BackendApiClient.findStudentByEmail(BackendApiClient.currentUsername());
+                if ("LECTURER".equals(role)) record = BackendApiClient.findLecturerByEmail(BackendApiClient.currentUsername());
+                if (!"ADMIN".equals(role) && record == null) throw new java.io.IOException("Your linked record is unavailable. Contact an administrator.");
+                } catch(Exception loadError) {
+                    throw new java.io.IOException("Your password was accepted, but your account details could not be loaded: "+loadError.getMessage(),loadError);
                 }
-                String lecturer = BackendApiClient.findLecturerByEmail(username);
-                if (lecturer != null) {
-                    int lecturerIndex = LecturerData.useBackendLecturer(lecturer);
-                    this.dispose();
-                    new LecturerDashboardGUI(lecturerIndex).setGUI();
-                    return;
-                }
-                JOptionPane.showMessageDialog(this, "No student or lecturer was found for that email.");
-            } catch (Exception exception) {
-                JOptionPane.showMessageDialog(this,
-                        "The backend could not be reached. Start it on port 8080 and try again.\n"
-                        + exception.getMessage());
+                return role;
             }
-        }
+            @Override protected void done() {
+                passwordTxtFld.setText("");
+                try {
+                    String role = get();
+                    switch (role) {
+                        case "ADMIN" -> new AdminDashboardGUI().setGUI();
+                        case "STUDENT" -> { ApplicationPreviewData.loadBackendResult(record); new StudentDashboardGUI().setGUI(); }
+                        case "LECTURER" -> new LecturerDashboardGUI(LecturerData.useBackendLecturer(record)).setGUI();
+                        default -> throw new IllegalStateException("This account has no supported role.");
+                    }
+                    dispose();
+                } catch (Exception exception) {
+                    BackendApiClient.clearSession();
+                    Throwable cause = exception.getCause() == null ? exception : exception.getCause();
+                    JOptionPane.showMessageDialog(LoginGUI.this, cause.getMessage(), "Sign in failed", JOptionPane.ERROR_MESSAGE);
+                } finally { loginBtn.setEnabled(true); homeBtn.setEnabled(true); }
+            }
+        }.execute();
     }
 }

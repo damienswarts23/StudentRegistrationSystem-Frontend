@@ -17,7 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class LecturerClassStudentsGUI extends JFrame implements ActionListener {
+public class LecturerClassStudentsGUI extends AppFrame implements ActionListener {
     private final int lecturerIndex;
     private final String classCode;
     private final String className;
@@ -36,14 +36,14 @@ public class LecturerClassStudentsGUI extends JFrame implements ActionListener {
         JPanel buttonPnl = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         headerPnl.setBackground(GUIStyle.NAVY);
-        headerPnl.setBorder(BorderFactory.createEmptyBorder(22, 34, 22, 34));
+        headerPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JLabel headerLbl = new JLabel("STUDENT REGISTRATION SYSTEM");
-        headerLbl.setFont(new Font("Arial", Font.BOLD, 21));
+        headerLbl.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 21));
         headerLbl.setForeground(Color.WHITE);
         headerPnl.add(headerLbl, BorderLayout.WEST);
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(32, 50, 35, 50));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel titlePnl = new JPanel(new GridLayout(2, 1, 5, 5));
         titlePnl.setBackground(GUIStyle.BACKGROUND);
         titlePnl.add(GUIStyle.heading(classCode + " STUDENTS", 25));
@@ -53,8 +53,8 @@ public class LecturerClassStudentsGUI extends JFrame implements ActionListener {
 
         JTable studentTable = new JTable(new DefaultTableModel(LecturerStudentData.studentsForClass(classCode), new String[]{"Student Number", "First Name", "Last Name", "Student Email", "Date of Birth"}));
         studentTable.setRowHeight(30);
-        studentTable.setFont(new Font("Arial", Font.PLAIN, 13));
-        studentTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 13));
+        studentTable.setFont(new Font(GUIStyle.FONT_FAMILY, Font.PLAIN, 13));
+        studentTable.getTableHeader().setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 13));
         JScrollPane scrollPane = GUIStyle.plainScrollPane(studentTable);
 
         backBtn = GUIStyle.secondaryButton("Back");

@@ -1,5 +1,6 @@
 package za.ac.mycput.studentregistrationsystem.frontend.view;
 
+import za.ac.mycput.studentregistrationsystem.frontend.service.BackendApiClient;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-public class AdminDashboardGUI extends JFrame implements ActionListener {
+public class AdminDashboardGUI extends AppFrame implements ActionListener {
     private JButton addLecturerBtn;
     private JButton allLecturersBtn;
     private JButton editLecturerBtn;
@@ -30,6 +31,9 @@ public class AdminDashboardGUI extends JFrame implements ActionListener {
     private JButton logoutBtn;
 
     public void setGUI() {
+        if (!"ADMIN".equals(BackendApiClient.currentRole())) {
+            dispose(); new LoginGUI().setGUI(); return;
+        }
         JPanel mainPnl = new JPanel(new BorderLayout());
         JPanel headerPnl = new JPanel(new BorderLayout());
         JPanel titlePnl = new JPanel(new GridLayout(2, 1, 4, 4));
@@ -38,10 +42,10 @@ public class AdminDashboardGUI extends JFrame implements ActionListener {
         JTabbedPane tabbedPane = new JTabbedPane();
 
         headerPnl.setBackground(GUIStyle.NAVY);
-        headerPnl.setBorder(BorderFactory.createEmptyBorder(22, 35, 22, 35));
+        headerPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         titlePnl.setBackground(GUIStyle.NAVY);
-        JLabel systemLbl = new JLabel("STUDENT REGISTRATION SYSTEM");
-        systemLbl.setFont(new Font("Arial", Font.BOLD, 23));
+        JLabel systemLbl = new JLabel(BackendApiClient.currentName());
+        systemLbl.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 40));
         systemLbl.setForeground(Color.WHITE);
         JLabel roleLbl = new JLabel("ADMINISTRATOR");
         roleLbl.setForeground(new Color(209, 213, 219));
@@ -54,7 +58,7 @@ public class AdminDashboardGUI extends JFrame implements ActionListener {
         headerPnl.add(logoutPnl, BorderLayout.EAST);
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(32, 35, 35, 35));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel introPnl = new JPanel(new GridLayout(2, 1, 5, 5));
         introPnl.setBackground(GUIStyle.BACKGROUND);
         introPnl.add(GUIStyle.heading("ADMIN MENU", 27));
@@ -65,7 +69,17 @@ public class AdminDashboardGUI extends JFrame implements ActionListener {
         tabbedPane.addTab("Lecturers", lecturerTab());
         tabbedPane.addTab("Departments", departmentTab());
         tabbedPane.addTab("Students", studentTab());
-        contentPnl.add(introPnl, BorderLayout.NORTH);
+        AdminLogPanel adminLog = new AdminLogPanel();
+        tabbedPane.addTab("Admin log", adminLog);
+        tabbedPane.addChangeListener(event -> {
+            if(tabbedPane.getSelectedComponent()==adminLog) adminLog.refresh();
+        });
+        JPanel introRow = new JPanel(new BorderLayout(24, 0));
+        introRow.setOpaque(false);
+        introRow.add(introPnl, BorderLayout.CENTER);
+        JPanel profilePanel = DashboardComponents.profile(() -> { dispose(); new AdminSettingsGUI().setGUI(); });
+        introRow.add(profilePanel, BorderLayout.EAST);
+        contentPnl.add(introRow, BorderLayout.NORTH);
         contentPnl.add(tabbedPane, BorderLayout.CENTER);
         logoutBtn.addActionListener(this);
         mainPnl.add(headerPnl, BorderLayout.NORTH);
@@ -130,21 +144,16 @@ public class AdminDashboardGUI extends JFrame implements ActionListener {
     }
 
     private JPanel menuCard(String titleText, String infoText, JButton button) {
-        JPanel card = GUIStyle.whiteCard();
-        JPanel btnPnl = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        card.setLayout(new BorderLayout(0, 15));
-        btnPnl.setBackground(GUIStyle.WHITE);
-        btnPnl.add(button);
-        card.add(GUIStyle.heading(titleText, 17), BorderLayout.NORTH);
-        card.add(GUIStyle.normalLabel(infoText), BorderLayout.CENTER);
-        card.add(btnPnl, BorderLayout.SOUTH);
-        return card;
+        return GUIStyle.actionCard(titleText, infoText, button);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         this.dispose();
         if (e.getSource() == logoutBtn) {
+            try { BackendApiClient.logout(); } catch (Exception ex) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Signed out locally. The backend could not confirm logout.");
+            }
             new LoginGUI().setGUI();
         } else if (e.getSource() == addLecturerBtn) {
             new AddLecturerGUI().setGUI();

@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class LecturerSavePreviewGUI extends JFrame implements ActionListener {
+public class LecturerSavePreviewGUI extends AppFrame implements ActionListener {
     private JButton saveLecturerBtn;
     private JButton backBtn;
 
@@ -31,14 +31,14 @@ public class LecturerSavePreviewGUI extends JFrame implements ActionListener {
         String[] lecturer = LecturerData.pendingLecturer();
 
         headerPnl.setBackground(GUIStyle.NAVY);
-        headerPnl.setBorder(BorderFactory.createEmptyBorder(22, 34, 22, 34));
+        headerPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JLabel headerLbl = new JLabel("STUDENT REGISTRATION SYSTEM");
-        headerLbl.setFont(new Font("Arial", Font.BOLD, 21));
+        headerLbl.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 21));
         headerLbl.setForeground(Color.WHITE);
         headerPnl.add(headerLbl, BorderLayout.WEST);
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(35, 170, 40, 170));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel titlePnl = new JPanel(new GridLayout(2, 1, 5, 5));
         titlePnl.setBackground(GUIStyle.BACKGROUND);
         titlePnl.add(GUIStyle.heading("LECTURER DETAILS", 25));
@@ -92,7 +92,7 @@ public class LecturerSavePreviewGUI extends JFrame implements ActionListener {
 
     private void addRow(JPanel panel, String labelText, String valueText) {
         JLabel label = GUIStyle.normalLabel(labelText);
-        label.setFont(new Font("Arial", Font.BOLD, 13));
+        label.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 13));
         panel.add(label);
         panel.add(GUIStyle.normalLabel(valueText));
     }
@@ -111,11 +111,13 @@ public class LecturerSavePreviewGUI extends JFrame implements ActionListener {
             return;
         }
 
+        String initialPassword = LecturerLoginDialog.choosePassword(this);
+        if(initialPassword==null)return;
         try {
-            int lecturerIndex = LecturerData.savePendingLecturerToBackend();
+            int lecturerIndex = LecturerData.savePendingLecturerToBackend(initialPassword);
             String[] lecturer = LecturerData.lecturerAt(lecturerIndex);
             JOptionPane.showMessageDialog(this,
-                    "Lecturer saved successfully.\n\n"
+                    "Lecturer and login account saved successfully.\nUse the initial password you just entered.\n\n"
                     + "Lecturer Number: " + lecturer[LecturerData.LECTURER_NUMBER] + "\n"
                     + "Lecturer Email: " + lecturer[LecturerData.EMAIL]);
             this.dispose();

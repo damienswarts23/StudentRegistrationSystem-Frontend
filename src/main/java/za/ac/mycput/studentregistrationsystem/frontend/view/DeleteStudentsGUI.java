@@ -19,7 +19,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import za.ac.mycput.studentregistrationsystem.frontend.service.BackendApiClient.StudentAdminOption;
 
-public class DeleteStudentsGUI extends JFrame implements ActionListener {
+public class DeleteStudentsGUI extends AppFrame implements ActionListener {
     private JButton backBtn;
     private JButton deleteBtn;
     private JTable studentTable;
@@ -36,14 +36,14 @@ public class DeleteStudentsGUI extends JFrame implements ActionListener {
         JPanel contentPnl = new JPanel(new BorderLayout(0, 18));
         JPanel buttonPnl = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         headerPnl.setBackground(GUIStyle.NAVY);
-        headerPnl.setBorder(BorderFactory.createEmptyBorder(22, 34, 22, 34));
+        headerPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JLabel headerLbl = new JLabel("STUDENT REGISTRATION SYSTEM");
-        headerLbl.setFont(new Font("Arial", Font.BOLD, 21));
+        headerLbl.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 21));
         headerLbl.setForeground(Color.WHITE);
         headerPnl.add(headerLbl, BorderLayout.WEST);
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(32, 42, 35, 42));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel titlePnl = new JPanel(new GridLayout(2, 1, 5, 5));
         titlePnl.setBackground(GUIStyle.BACKGROUND);
         titlePnl.add(GUIStyle.heading("DELETE STUDENT", 25));
@@ -55,8 +55,8 @@ public class DeleteStudentsGUI extends JFrame implements ActionListener {
         studentTable = new JTable(new DefaultTableModel(rows(),
                 new String[]{"Student ID", "Student Number", "Name", "Student Email", "Course"}));
         studentTable.setRowHeight(30);
-        studentTable.setFont(new Font("Arial", Font.PLAIN, 13));
-        studentTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 13));
+        studentTable.setFont(new Font(GUIStyle.FONT_FAMILY, Font.PLAIN, 13));
+        studentTable.getTableHeader().setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 13));
 
         backBtn = GUIStyle.secondaryButton("Dashboard");
         deleteBtn = GUIStyle.primaryButton("Delete Selected Student");

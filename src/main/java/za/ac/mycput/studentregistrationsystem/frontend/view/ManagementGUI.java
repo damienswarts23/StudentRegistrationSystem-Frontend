@@ -18,7 +18,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class ManagementGUI extends JFrame implements ActionListener {
+public class ManagementGUI extends AppFrame implements ActionListener {
     private final String entity;
     private JButton backBtn;
     private JButton addBtn;
@@ -37,16 +37,16 @@ public class ManagementGUI extends JFrame implements ActionListener {
         JPanel actionPnl = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         headerPnl.setBackground(GUIStyle.NAVY);
-        headerPnl.setBorder(BorderFactory.createEmptyBorder(21, 32, 21, 32));
+        headerPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JLabel systemLbl = new JLabel("STUDENT REGISTRATION SYSTEM");
-        systemLbl.setFont(new Font("Arial", Font.BOLD, 21));
+        systemLbl.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 21));
         systemLbl.setForeground(Color.WHITE);
         backBtn = GUIStyle.secondaryButton("Dashboard");
         headerPnl.add(systemLbl, BorderLayout.WEST);
         headerPnl.add(backBtn, BorderLayout.EAST);
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(28, 32, 32, 32));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel topPnl = new JPanel(new GridLayout(2, 1, 5, 5));
         topPnl.setBackground(GUIStyle.BACKGROUND);
         topPnl.add(GUIStyle.heading(entity.substring(0, entity.length() - (entity.endsWith("s") ? 1 : 0)) + " Management", 26));
@@ -74,8 +74,8 @@ public class ManagementGUI extends JFrame implements ActionListener {
 
         JTable table = new JTable(new DefaultTableModel(rows(), columns()));
         table.setRowHeight(30);
-        table.setFont(new Font("Arial", Font.PLAIN, 13));
-        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 13));
+        table.setFont(new Font(GUIStyle.FONT_FAMILY, Font.PLAIN, 13));
+        table.getTableHeader().setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 13));
         JScrollPane scrollPane = GUIStyle.plainScrollPane(table);
         JPanel centrePnl = new JPanel(new BorderLayout(0, 15));
         centrePnl.setBackground(GUIStyle.BACKGROUND);

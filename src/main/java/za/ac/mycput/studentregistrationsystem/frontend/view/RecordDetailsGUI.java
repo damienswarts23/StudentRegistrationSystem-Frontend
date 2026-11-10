@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class RecordDetailsGUI extends JFrame implements ActionListener {
+public class RecordDetailsGUI extends AppFrame implements ActionListener {
     private final String entity;
     private JButton backBtn;
 
@@ -32,13 +32,13 @@ public class RecordDetailsGUI extends JFrame implements ActionListener {
         JPanel buttonPnl = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         headerPnl.setBackground(GUIStyle.NAVY);
-        headerPnl.setBorder(BorderFactory.createEmptyBorder(22, 34, 22, 34));
+        headerPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JLabel headerLbl = new JLabel("STUDENT REGISTRATION SYSTEM");
-        headerLbl.setFont(new Font("Arial", Font.BOLD, 21));
+        headerLbl.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 21));
         headerLbl.setForeground(Color.WHITE);
         headerPnl.add(headerLbl, BorderLayout.WEST);
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(32, 190, 40, 190));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel titlePnl = new JPanel(new GridLayout(2, 1, 5, 5));
         titlePnl.setBackground(GUIStyle.BACKGROUND);
         titlePnl.add(GUIStyle.heading(singular(entity).toUpperCase() + " DETAILS", 25));
@@ -50,7 +50,7 @@ public class RecordDetailsGUI extends JFrame implements ActionListener {
         String[] values = values();
         for (int i = 0; i < labels.length; i++) {
             JLabel name = GUIStyle.normalLabel(labels[i]);
-            name.setFont(new Font("Arial", Font.BOLD, 13));
+            name.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 13));
             valuesPnl.add(name);
             valuesPnl.add(GUIStyle.normalLabel(values[i]));
         }

@@ -19,7 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class ViewDepartmentCoursesGUI extends JFrame implements ActionListener {
+public class ViewDepartmentCoursesGUI extends AppFrame implements ActionListener {
     private final int departmentIndex;
     private JButton backBtn;
     private JTable courseTable;
@@ -36,14 +36,14 @@ public class ViewDepartmentCoursesGUI extends JFrame implements ActionListener {
         String[] department = DepartmentCreationData.savedDepartmentAt(departmentIndex);
 
         headerPnl.setBackground(GUIStyle.NAVY);
-        headerPnl.setBorder(BorderFactory.createEmptyBorder(22, 34, 22, 34));
+        headerPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JLabel headerLbl = new JLabel("STUDENT REGISTRATION SYSTEM");
-        headerLbl.setFont(new Font("Arial", Font.BOLD, 21));
+        headerLbl.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 21));
         headerLbl.setForeground(Color.WHITE);
         headerPnl.add(headerLbl, BorderLayout.WEST);
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(32, 50, 35, 50));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel titlePnl = new JPanel(new GridLayout(2, 1, 5, 5));
         titlePnl.setBackground(GUIStyle.BACKGROUND);
         titlePnl.add(GUIStyle.heading("VIEW COURSES", 25));
@@ -53,8 +53,8 @@ public class ViewDepartmentCoursesGUI extends JFrame implements ActionListener {
 
         courseTable = new JTable(new DefaultTableModel(rows(), new String[]{"Course ID", "Course Code", "Course Name", "Department"}));
         courseTable.setRowHeight(30);
-        courseTable.setFont(new Font("Arial", Font.PLAIN, 13));
-        courseTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 13));
+        courseTable.setFont(new Font(GUIStyle.FONT_FAMILY, Font.PLAIN, 13));
+        courseTable.getTableHeader().setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 13));
         courseTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

@@ -17,7 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class EditDepartmentsGUI extends JFrame implements ActionListener {
+public class EditDepartmentsGUI extends AppFrame implements ActionListener {
     private JButton nextBtn;
     private JButton backBtn;
     private JTable departmentTable;
@@ -29,14 +29,14 @@ public class EditDepartmentsGUI extends JFrame implements ActionListener {
         JPanel buttonPnl = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         headerPnl.setBackground(GUIStyle.NAVY);
-        headerPnl.setBorder(BorderFactory.createEmptyBorder(22, 34, 22, 34));
+        headerPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JLabel headerLbl = new JLabel("STUDENT REGISTRATION SYSTEM");
-        headerLbl.setFont(new Font("Arial", Font.BOLD, 21));
+        headerLbl.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 21));
         headerLbl.setForeground(Color.WHITE);
         headerPnl.add(headerLbl, BorderLayout.WEST);
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(32, 50, 35, 50));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel titlePnl = new JPanel(new GridLayout(2, 1, 5, 5));
         titlePnl.setBackground(GUIStyle.BACKGROUND);
         titlePnl.add(GUIStyle.heading("EDIT DEPARTMENTS", 25));
@@ -46,8 +46,8 @@ public class EditDepartmentsGUI extends JFrame implements ActionListener {
 
         departmentTable = new JTable(new DefaultTableModel(rows(), new String[]{"Department ID", "Department Code", "Department Name"}));
         departmentTable.setRowHeight(30);
-        departmentTable.setFont(new Font("Arial", Font.PLAIN, 13));
-        departmentTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 13));
+        departmentTable.setFont(new Font(GUIStyle.FONT_FAMILY, Font.PLAIN, 13));
+        departmentTable.getTableHeader().setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 13));
         JScrollPane scrollPane = GUIStyle.plainScrollPane(departmentTable);
 
         nextBtn = GUIStyle.primaryButton("Next");

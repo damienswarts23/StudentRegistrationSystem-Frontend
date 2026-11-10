@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 import za.ac.mycput.studentregistrationsystem.frontend.service.BackendApiClient;
 
-public class TrackApplicationGUI extends JFrame implements ActionListener {
+public class TrackApplicationGUI extends AppFrame implements ActionListener {
     private JTextField emailTxtFld;
     private JTextField nameTxtFld;
     private JTextField surnameTxtFld;
@@ -44,14 +44,14 @@ public class TrackApplicationGUI extends JFrame implements ActionListener {
         JPanel buttonPnl = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         headerPnl.setBackground(GUIStyle.NAVY);
-        headerPnl.setBorder(BorderFactory.createEmptyBorder(22, 34, 22, 34));
+        headerPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JLabel headerLbl = new JLabel("STUDENT REGISTRATION SYSTEM");
-        headerLbl.setFont(new Font("Arial", Font.BOLD, 21));
+        headerLbl.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 21));
         headerLbl.setForeground(Color.WHITE);
         headerPnl.add(headerLbl, BorderLayout.WEST);
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(30, 75, 35, 75));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel titlePnl = new JPanel(new GridLayout(2, 1, 5, 5));
         titlePnl.setBackground(GUIStyle.BACKGROUND);
         titlePnl.add(GUIStyle.heading(showStatus ? "APPLICATION DETAILS" : "TRACK APPLICATION", 25));
@@ -80,6 +80,14 @@ public class TrackApplicationGUI extends JFrame implements ActionListener {
         homeBtn = GUIStyle.secondaryButton("Home");
         checkStatusBtn = GUIStyle.primaryButton("Check Application Status");
         buttonPnl.setBackground(GUIStyle.WHITE);
+        JButton signIn=GUIStyle.secondaryButton("Sign in");
+        signIn.addActionListener(event->{dispose();new LoginGUI().setGUI();});
+        buttonPnl.add(signIn);
+        if(showStatus && ApplicationPreviewData.studentId()>0) {
+            JButton activate=GUIStyle.primaryButton("Set login password");
+            activate.addActionListener(event->StudentLoginActivation.enable(this,activate,ApplicationPreviewData.studentId()));
+            buttonPnl.add(activate);
+        }
         buttonPnl.add(homeBtn);
         buttonPnl.add(checkStatusBtn);
 
@@ -120,10 +128,10 @@ public class TrackApplicationGUI extends JFrame implements ActionListener {
         addStatusRow(valuesPnl, "Course One", ApplicationPreviewData.courseStatus(0));
         addStatusRow(valuesPnl, "Course Two", ApplicationPreviewData.courseStatus(1));
         addStatusRow(valuesPnl, "Course Three", ApplicationPreviewData.courseStatus(2));
-        addStatusRow(valuesPnl, "Next Step", "Login with student email and student number.");
+        addStatusRow(valuesPnl, "Next Step", "Set your login password, then sign in.");
         JPanel messagePnl = new JPanel(new GridLayout(2, 1, 4, 4));
         JLabel messageLbl = GUIStyle.normalLabel("Once you have been accepted and want to register for that course,");
-        JLabel messageLbl2 = GUIStyle.normalLabel("log in using your student email address and your student number as a temporary password.");
+        JLabel messageLbl2 = GUIStyle.normalLabel("use Set login password below, then sign in with your student email and chosen password.");
         messagePnl.setBackground(GUIStyle.WHITE);
         messageLbl.setForeground(GUIStyle.MUTED);
         messageLbl2.setForeground(GUIStyle.MUTED);
@@ -136,7 +144,7 @@ public class TrackApplicationGUI extends JFrame implements ActionListener {
 
     private void addStatusRow(JPanel panel, String labelText, String valueText) {
         JLabel label = GUIStyle.normalLabel(labelText);
-        label.setFont(new Font("Arial", Font.BOLD, 13));
+        label.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 13));
         panel.add(label);
         panel.add(GUIStyle.normalLabel(valueText));
     }
@@ -154,9 +162,7 @@ public class TrackApplicationGUI extends JFrame implements ActionListener {
                 this.dispose();
                 new TrackApplicationGUI(true).setGUI();
             } catch (Exception exception) {
-                JOptionPane.showMessageDialog(this,
-                        "No processed application was found for that email.\n"
-                        + "Make sure the backend is running and the application was submitted.");
+                SwingUtilitiesHelper.showBackendError(this, exception);
             }
         }
     }

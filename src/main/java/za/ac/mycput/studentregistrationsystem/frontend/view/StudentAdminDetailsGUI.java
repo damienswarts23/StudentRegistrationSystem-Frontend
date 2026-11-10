@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import za.ac.mycput.studentregistrationsystem.frontend.service.BackendApiClient.StudentAdminOption;
 
-public class StudentAdminDetailsGUI extends JFrame implements ActionListener {
+public class StudentAdminDetailsGUI extends AppFrame implements ActionListener {
     private final int studentIndex;
     private JButton backBtn;
 
@@ -33,14 +33,14 @@ public class StudentAdminDetailsGUI extends JFrame implements ActionListener {
         JPanel buttonPnl = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         headerPnl.setBackground(GUIStyle.NAVY);
-        headerPnl.setBorder(BorderFactory.createEmptyBorder(22, 34, 22, 34));
+        headerPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JLabel headerLbl = new JLabel("STUDENT REGISTRATION SYSTEM");
-        headerLbl.setFont(new Font("Arial", Font.BOLD, 21));
+        headerLbl.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 21));
         headerLbl.setForeground(Color.WHITE);
         headerPnl.add(headerLbl, BorderLayout.WEST);
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(28, 150, 35, 150));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel titlePnl = new JPanel(new GridLayout(2, 1, 5, 5));
         titlePnl.setBackground(GUIStyle.BACKGROUND);
         titlePnl.add(GUIStyle.heading("STUDENT DETAILS", 25));
@@ -70,6 +70,9 @@ public class StudentAdminDetailsGUI extends JFrame implements ActionListener {
 
         backBtn = GUIStyle.secondaryButton("Back");
         buttonPnl.setBackground(GUIStyle.WHITE);
+        JButton enableLogin=GUIStyle.primaryButton("Set/reset student login");
+        enableLogin.addActionListener(event->StudentLoginActivation.reset(this,enableLogin,student.getStudentId()));
+        buttonPnl.add(enableLogin);
         buttonPnl.add(backBtn);
         backBtn.addActionListener(this);
         cardPnl.setLayout(new BorderLayout(0, 20));
@@ -89,7 +92,7 @@ public class StudentAdminDetailsGUI extends JFrame implements ActionListener {
 
     private void addRow(JPanel panel, String labelText, String valueText) {
         JLabel label = GUIStyle.normalLabel(labelText);
-        label.setFont(new Font("Arial", Font.BOLD, 13));
+        label.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 13));
         panel.add(label);
         panel.add(GUIStyle.normalLabel(valueText == null ? "" : valueText));
     }

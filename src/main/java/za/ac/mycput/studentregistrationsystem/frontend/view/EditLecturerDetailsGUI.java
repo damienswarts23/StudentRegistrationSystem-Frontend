@@ -23,7 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import za.ac.mycput.studentregistrationsystem.frontend.service.BackendApiClient.ClassOption;
 
-public class EditLecturerDetailsGUI extends JFrame implements ActionListener {
+public class EditLecturerDetailsGUI extends AppFrame implements ActionListener {
     private final int lecturerIndex;
     private JTextField surnameTxtFld;
     private JTextField personalEmailTxtFld;
@@ -56,14 +56,14 @@ public class EditLecturerDetailsGUI extends JFrame implements ActionListener {
         String[] lecturer = LecturerData.lecturerAt(lecturerIndex);
 
         headerPnl.setBackground(GUIStyle.NAVY);
-        headerPnl.setBorder(BorderFactory.createEmptyBorder(22, 34, 22, 34));
+        headerPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JLabel headerLbl = new JLabel("STUDENT REGISTRATION SYSTEM");
-        headerLbl.setFont(new Font("Arial", Font.BOLD, 21));
+        headerLbl.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 21));
         headerLbl.setForeground(Color.WHITE);
         headerPnl.add(headerLbl, BorderLayout.WEST);
 
         contentPnl.setBackground(GUIStyle.BACKGROUND);
-        contentPnl.setBorder(BorderFactory.createEmptyBorder(28, 110, 35, 110));
+        contentPnl.setBorder(BorderFactory.createEmptyBorder(18, 32, 18, 32));
         JPanel titlePnl = new JPanel(new GridLayout(2, 1, 5, 5));
         titlePnl.setBackground(GUIStyle.BACKGROUND);
         titlePnl.add(GUIStyle.heading("EDIT LECTURER DETAILS", 25));
@@ -108,7 +108,7 @@ public class EditLecturerDetailsGUI extends JFrame implements ActionListener {
         classPnl.add(boldLabel("Assigned"));
         loadClassOptions(classPnl, lecturer);
         JScrollPane classScrollPane = GUIStyle.plainScrollPane(classPnl);
-        classScrollPane.setPreferredSize(new Dimension(760, 220));
+        classScrollPane.setPreferredSize(new Dimension(760, 120));
         classScrollPane.getVerticalScrollBar().setUnitIncrement(14);
         classesSection.add(classScrollPane, BorderLayout.CENTER);
 
@@ -198,7 +198,7 @@ public class EditLecturerDetailsGUI extends JFrame implements ActionListener {
 
     private JLabel boldLabel(String text) {
         JLabel label = GUIStyle.normalLabel(text);
-        label.setFont(new Font("Arial", Font.BOLD, 13));
+        label.setFont(new Font(GUIStyle.FONT_FAMILY, Font.BOLD, 13));
         return label;
     }
 
