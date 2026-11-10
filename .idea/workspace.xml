@@ -5,64 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aad9ced5-e6fb-4d21-923a-79dedd0fa5c3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/StudentRegistrationSystemFrontend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/StudentRegistrationSystemFrontend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/service/BackendApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/service/BackendApiClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/AddCourseClassGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/AddCourseClassGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/AddDepartmentCourseGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/AddDepartmentCourseGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/AddLecturerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/AddLecturerGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/AdminDashboardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/AdminDashboardGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/AllLecturersGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/AllLecturersGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/AllStudentsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/AllStudentsGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/ApplicantFormGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/ApplicantFormGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/AssignLecturerClassesGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/AssignLecturerClassesGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/CourseClassesGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/CourseClassesGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/CourseSelectionGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/CourseSelectionGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/CreateDepartmentGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/CreateDepartmentGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/DeleteCourseClassesGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/DeleteCourseClassesGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/DeleteDepartmentCoursesGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/DeleteDepartmentCoursesGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/DeleteDepartmentGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/DeleteDepartmentGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/DeleteLecturerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/DeleteLecturerGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/DeleteStudentsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/DeleteStudentsGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/DepartmentCoursesGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/DepartmentCoursesGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/DepartmentsCreationGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/DepartmentsCreationGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/DeregisterClassGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/DeregisterClassGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditAddCourseClassGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditAddCourseClassGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditAddDepartmentCourseGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditAddDepartmentCourseGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditCourseClassesGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditCourseClassesGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditDepartmentCoursesGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditDepartmentCoursesGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditDepartmentsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditDepartmentsGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditLecturerDetailsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditLecturerDetailsGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditLecturerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditLecturerGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditStudentAdminDetailsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditStudentAdminDetailsGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditStudentDetailsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditStudentDetailsGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditStudentsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/EditStudentsGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/GUIStyle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/GUIStyle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/HomeGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/HomeGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/LecturerClassStudentsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/LecturerClassStudentsGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/LecturerDashboardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/LecturerDashboardGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/LecturerData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/LecturerData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/LecturerDetailsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/LecturerDetailsGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/LecturerMyClassesGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/LecturerMyClassesGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/LecturerSavePreviewGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/LecturerSavePreviewGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/LecturerViewStudentsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/LecturerViewStudentsGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/LoginGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/LoginGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/ManagementGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/ManagementGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/MyClassesGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/MyClassesGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/RecordDetailsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/RecordDetailsGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/RecordFormGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/RecordFormGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/RegisterClassGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/RegisterClassGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/StudentAdminDetailsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/StudentAdminDetailsGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/StudentDashboardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/StudentDashboardGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/TrackApplicationGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/TrackApplicationGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/ViewCourseClassesGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/ViewCourseClassesGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/ViewDepartmentCoursesGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/ViewDepartmentCoursesGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/ViewDepartmentsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/za/ac/mycput/studentregistrationsystem/frontend/view/ViewDepartmentsGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,6 +34,65 @@
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0025422208875596" />
+      <entry key="MS500" value="1.3960555126817669" />
+      <entry key="S2" value="3.200104119059843" />
+      <entry key="S5" value="5.914981178821948" />
+      <entry key="S10" value="9.026744827599218" />
+      <entry key="S30" value="15.592381655746452" />
+      <entry key="S60" value="21.81572218514556" />
+      <entry key="M2" value="32.39839969480073" />
+      <entry key="M5" value="49.27596978263806" />
+      <entry key="M10" value="58.96115472994863" />
+      <entry key="M15" value="62.880614816882904" />
+      <entry key="M30" value="67.21143422466699" />
+      <entry key="H1" value="69.54539769896189" />
+      <entry key="H2" value="70.75721259728843" />
+      <entry key="H4" value="71.37468271431429" />
+      <entry key="D1" value="71.89523103672657" />
+      <entry key="W1" value="71.98501949144196" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.8667812698237684" />
+      <entry key="MS500" value="1.3578708527462" />
+      <entry key="S2" value="3.180020365892166" />
+      <entry key="S5" value="5.9006168356517374" />
+      <entry key="S10" value="9.0153809728764" />
+      <entry key="S30" value="15.584844493584141" />
+      <entry key="S60" value="21.809959491702017" />
+      <entry key="M2" value="32.39387723433251" />
+      <entry key="M5" value="49.273135688566555" />
+      <entry key="M10" value="58.9594449284853" />
+      <entry key="M15" value="62.87939601031018" />
+      <entry key="M30" value="67.21078121227605" />
+      <entry key="H1" value="69.5450594414863" />
+      <entry key="H2" value="70.75704041773193" />
+      <entry key="H4" value="71.37459584725418" />
+      <entry key="D1" value="71.8952164496685" />
+      <entry key="W1" value="71.98501740488531" />
+    </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -164,5 +167,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Updated the frontend with improved login and session handling, refreshed dashboards, RegiLearn branding, and new icons and campus photos. Added account activation, personal settings, and admin logs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated the frontend with improved login and session handling, refreshed dashboards, RegiLearn branding, and new icons and campus photos. Added account activation, personal settings, and admin logs." />
   </component>
 </project>
